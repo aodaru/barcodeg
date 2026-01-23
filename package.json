@@ -1,0 +1,29 @@
+{
+  "name": "barcodeg",
+  "version": "1.0.0",
+  "description": "api for generate barcode ean/upc and 128 code",
+  "homepage": "https://github.com/aodaru/barcodeg#readme",
+  "bugs": {
+    "url": "https://github.com/aodaru/barcodeg/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/aodaru/barcodeg.git"
+  },
+  "license": "MIT",
+  "author": "Adal Michael Garcia",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node index.ts",
+    "docs": "node generate-docs.js",
+    "watch": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "2.8.6",
+    "express": "5.2.1",
+    "jsbarcode": "3.12.3",
+    "xmldom": "0.6.0"
+  }
+}
