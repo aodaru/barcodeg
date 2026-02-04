@@ -15,8 +15,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node index.ts",
+    "dev": "nodemon index.js",
+    "run": "node index.js",
     "docs": "node generate-docs.js",
     "watch": "node --watch index.js"
   },
@@ -25,5 +25,8 @@
     "express": "5.2.1",
     "jsbarcode": "3.12.3",
     "xmldom": "0.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }
