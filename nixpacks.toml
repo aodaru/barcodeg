@@ -1,0 +1,17 @@
+# nixpacks.toml
+
+[phases.setup]
+# Especifica la versión de Node.js y pnpm que necesitas
+nixPkgs = ["nodejs_24", "pnpm"]
+
+[phases.install]
+# Comando para instalar dependencias usando pnpm
+cmds = ["pnpm install"]
+
+[phases.build]
+# Si tienes un paso de compilación (como en TS o React), descomenta la siguiente línea:
+# cmds = ["npm run build"]
+
+[start]
+# El comando para ejecutar tu servidor
+cmd = "node index.js"

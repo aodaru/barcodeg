@@ -60,9 +60,10 @@ Parameters:
 
 ## Scripts
 
-- `pnpm test`: echo "Error: no test specified" && exit 1
-- `pnpm start`: node  --experimental-strip-types index.ts
+- `pnpm dev`: nodemon index.js
+- `pnpm run`: node index.js
 - `pnpm docs`: node generate-docs.js
+- `pnpm watch`: node --watch index.js
 
 ## Development
 
