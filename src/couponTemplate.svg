@@ -1,0 +1,22 @@
+<svg width="252" height="180" viewBox="0 0 252 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="252" height="180" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+  
+  <rect x="10" y="10" width="60" height="40" fill="#f0f0f0" stroke="#cccccc" stroke-width="1"/>
+  <text x="40" y="35" font-family="Arial, sans-serif" font-size="8" fill="#999999" text-anchor="middle">LOGO</text>
+  
+  <text x="242" y="25" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333333" text-anchor="end">CUPÓN DE DESCUENTO</text>
+  
+  <rect x="16" y="60" width="220" height="60" fill="#f9f9f9" stroke="#e0e0e0" stroke-width="1"/>
+  <g transform="translate(16, 70)">
+    {{BARCODE}}
+  </g>
+  
+  <text x="16" y="140" font-family="Arial, sans-serif" font-size="9" fill="#666666">ID: </text>
+  <text x="30" y="140" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333333">{{COUPON_ID}}</text>
+  
+  <text x="180" y="140" font-family="Arial, sans-serif" font-size="9" fill="#666666">Válido hasta: </text>
+  <text x="236" y="140" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333333" text-anchor="end">{{EXPIRATION_DATE}}</text>
+  
+  <text x="126" y="165" font-family="Arial, sans-serif" font-size="6" fill="#999999" text-anchor="middle">Válido únicamente en tiendas participantes. No canjeable por efectivo.</text>
+  <text x="126" y="173" font-family="Arial, sans-serif" font-size="6" fill="#999999" text-anchor="middle">Presentar este cupón al momento de la compra. Sujeto a disponibilidad.</text>
+</svg>
