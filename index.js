@@ -78,7 +78,7 @@ app.post('/coupon', (req, res) => {
     return res.status(400).json({ error: 'couponCode is required' })
   }
   
-  const barcode = getBarcodeSvg(couponCode)
+  const barcode = getBarcodeSvg(couponCode, { width: 2, height: 120 })
   const svg = buildCouponSvg(templates.coupon, barcode, couponId, expirationDate)
   
   return res.send(svg)

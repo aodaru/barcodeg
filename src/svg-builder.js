@@ -1,4 +1,5 @@
 import { extractSvgContent } from './barcode-generator.js'
+import { DOMParser, XMLSerializer } from 'xmldom'
 
 export function formatDateDDMMYYYY(dateString) {
   if (!dateString) return ''
@@ -54,17 +55,45 @@ export function overlaySVGs(baseSvgString, overlaySvgString, options = {}) {
 }
 
 export function buildCouponSvg(templateSvg, barcodeSvg, couponId, expirationDate) {
-  const templateContent = extractSvgContent(templateSvg)
-  const barcodeContent = extractSvgContent(barcodeSvg)
-  const formattedDate = formatDateDDMMYYYY(expirationDate)
+  const parser = new DOMParser()
+  const templateDoc = parser.parseFromString(templateSvg, 'image/svg+xml')
 
-  let svg = templateContent
+  const contenedorBarra = templateDoc.getElementById('contenedorBarra')
+  const barcodeElement = templateDoc.getElementById('barcode')
 
-  svg = svg.replace(/\{\{COUPON_ID\}\}/g, couponId || '')
-  svg = svg.replace(/\{\{EXPIRATION_DATE\}\}/g, formattedDate)
-  svg = svg.replace(/\{\{BARCODE\}\}/g, barcodeContent)
+  if (contenedorBarra && barcodeElement && barcodeSvg) {
+    const barcodeDoc = parser.parseFromString(barcodeSvg, 'image/svg+xml')
+    const barcodeContent = barcodeDoc.documentElement
+    const importedBarcode = templateDoc.importNode(barcodeContent, true)
 
-  const finalSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${svg}</svg>`
+    importedBarcode.setAttribute('x', '136')
+    importedBarcode.setAttribute('y', '205')
+    importedBarcode.setAttribute('width', '520')
+    importedBarcode.setAttribute('height', '100')
 
-  return finalSvg
+    barcodeElement.parentNode.replaceChild(importedBarcode, barcodeElement)
+  }
+
+  const couponIdElement = templateDoc.getElementById('couponId')
+  if (couponIdElement) {
+    const tspan = couponIdElement.getElementsByTagName('tspan')[0]
+    if (tspan) {
+      tspan.textContent = couponId || ''
+    } else {
+      couponIdElement.textContent = couponId || ''
+    }
+  }
+
+  const expirationDateElement = templateDoc.getElementById('expirationDate')
+  if (expirationDateElement) {
+    const tspan = expirationDateElement.getElementsByTagName('tspan')[0]
+    if (tspan) {
+      tspan.textContent = 'Valido hasta: ' + formatDateDDMMYYYY(expirationDate)
+    } else {
+      expirationDateElement.textContent = 'Valido hasta: ' + formatDateDDMMYYYY(expirationDate)
+    }
+  }
+
+  const serializer = new XMLSerializer()
+  return serializer.serializeToString(templateDoc)
 }

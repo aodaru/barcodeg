@@ -9,5 +9,5 @@ const loadTemplate = (filename) => {
 export const templates = {
   cardBlack: loadTemplate('cardBlackBack.svg'),
   cardOrange: loadTemplate('cardOrangeBack.svg'),
-  coupon: loadTemplate('couponTemplate.svg')
+  coupon: loadTemplate('cuponDescuento.svg')
 }
