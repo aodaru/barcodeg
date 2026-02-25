@@ -4,7 +4,7 @@ This file contains guidelines for agentic coding agents working in this reposito
 
 ## Project Overview
 
-This is `barcodeg` - a Node.js API for generating barcodes (EAN/UPC/128 codes). The project uses ES modules and is currently in early development.
+This is `barcodeg` - a Node.js API for generating barcodes (EAN/UPC/128 codes), coupon SVGs, and card templates. The project uses ES modules and includes n8n integration for automated coupon printing workflows.
 
 ## Build/Test Commands
 
@@ -40,9 +40,9 @@ pnpm dev
 - CommonJS (`require`/`module.exports`) is only used for legacy compatibility examples
 
 ### File Structure
-- `index.js` - Main entry point (currently empty)
+- `index.js` - Main entry point with Express server
 - `commonjs.js` - CommonJS compatibility example
-- Place new barcode generation logic in appropriate modules under `src/` or `lib/`
+- Place new barcode generation logic in appropriate modules under `src/`
 
 ### Import/Export Conventions
 ```javascript
@@ -166,6 +166,7 @@ await docAgent.generateReadme();
 The project currently uses these external dependencies:
 - **express** - Web framework for the API server
 - **jsbarcode** - Barcode generation library
+- **xmldom** - XML DOM manipulation for SVG processing
 
 When adding new dependencies:
 - Use pnpm for package management: `pnpm add <package>`
@@ -188,3 +189,16 @@ When adding new dependencies:
 - Prioritize code quality and proper error handling
 - Use the Documentation Agent for README updates
 - Consider the project's goal: API for generating EAN/UPC/128 barcodes
+
+## n8n Integration
+
+This project includes an n8n workflow for automated coupon printing. See [N8N_FLOW.md](./N8N_FLOW.md) for complete documentation.
+
+### Key Points for n8n Development
+- The API endpoint `/coupon` is designed for n8n integration
+- Returns SVG with embedded barcode for coupon templates
+- The n8n Code Node generates HTML with print-optimized CSS:
+  - Landscape orientation (11" x 8.5")
+  - 6 coupons per page (3 columns × 2 rows)
+  - Automatic page breaks using `page-break-after: always` and `break-after: page`
+- When modifying the HTML generator, test printing in browser first
