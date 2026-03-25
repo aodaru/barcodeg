@@ -30,7 +30,11 @@ export function getBarcodeSvg(value, options = {}) {
     height: 40
   }
 
-  JsBarcode(svgNode, value, { ...defaults, ...options })
+  try {
+    JsBarcode(svgNode, value, { ...defaults, ...options })
+  } catch(error) {
+    return 'error'
+  }
 
   return xmlSerializer.serializeToString(svgNode)
 }

@@ -32,7 +32,7 @@ export function overlaySVGs(baseSvgString, overlaySvgString, options = {}) {
     scale = 3,
     overlayWidth = 220,
     overlayHeight = 80,
-    sequenceNumber = null
+    cardId = null
   } = options
 
   const baseContent = extractSvgContent(baseSvgString)
@@ -44,9 +44,9 @@ export function overlaySVGs(baseSvgString, overlaySvgString, options = {}) {
 
   finalSvg += `<svg x="${x}" y="${y}" width="${overlayWidth}" height="${overlayHeight}" viewBox="0 0 ${overlayWidth} ${overlayHeight}" xmlns="http://www.w3.org/2000/svg">${overlayContent}</svg>`
 
-  if (sequenceNumber !== null) {
-    const formattedSequence = formatSequence(sequenceNumber)
-    finalSvg += `<text x="175" y="150" font-family="Montserrat-Medium, Montserrat" font-size="8px" font-weight="600" fill="#333">${formattedSequence}</text>`
+  if (cardId !== null) {
+    const formattedSequence = formatSequence(cardId)
+    finalSvg += `<text x="8" y="150" font-family="Montserrat-Medium, Montserrat" font-size="5px" font-weight="600" fill="#333">${formattedSequence}</text>`
   }
 
   finalSvg += '</g></svg>'
